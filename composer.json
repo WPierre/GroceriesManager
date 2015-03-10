@@ -23,7 +23,7 @@
 		"list"
 	],
 	"require" : {
-		"gedmo/doctrine-extensions" : "dev-master"
+		"gedmo/doctrine-extensions" : "2.3.*@dev"
 	},
 	"license" : "GPL-3.0",
 	"minimum-stability" : "dev"
