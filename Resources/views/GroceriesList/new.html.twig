@@ -1,0 +1,10 @@
+{% set active_tab = 'lists' %}
+{% extends 'WPierreGroceriesManagerBundle:Default:base.html.twig' %}
+
+{% block body -%}
+    <h1>GroceriesList creation</h1>
+
+    {{ form(form) }}
+
+<a href="{{ path('grocerieslist') }}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-arrow-left"></span> Retour aux listes</a>
+{% endblock %}

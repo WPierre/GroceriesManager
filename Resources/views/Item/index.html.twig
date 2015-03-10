@@ -1,0 +1,27 @@
+{% set active_tab = 'items' %}
+{% extends 'WPierreGroceriesManagerBundle:Default:base.html.twig' %}
+
+{% block body -%}
+    <h1>Item list</h1>
+
+	    <table class="table table-stripped records_list">
+	        <thead>
+	            <tr>
+	                <th data-field="category">Category</th>
+	                <th data-field="name">Name</th>
+	                <th>Actions</th>
+	            </tr>
+	        </thead>
+	        <tbody>
+	        {% for entity in entities %}
+	            <tr>
+	                <td><a href="{{ path('category_show', { 'id': entity.category.id }) }}">{{ entity.category.name }}</a></td>
+	            	<td><a href="{{ path('item_edit', { 'id': entity.id }) }}">{{ entity.name }}</a></td>
+	                <td><a href="{{ path('item_edit', { 'id': entity.id }) }}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-pencil"></span> Modifier</a>
+	                </td>
+	            </tr>
+	        {% endfor %}
+	        </tbody>
+	    </table>
+<a href="{{ path('item_new') }}" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus-sign"></span> Nouvel item</a>
+    {% endblock %}

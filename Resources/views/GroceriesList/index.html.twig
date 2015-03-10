@@ -1,0 +1,29 @@
+{% set active_tab = 'lists' %}
+{% extends 'WPierreGroceriesManagerBundle:Default:base.html.twig' %}
+
+{% block body -%}
+    <h1>GroceriesList list</h1>
+
+    <table class="records_list table table_stripped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Last update</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('grocerieslist_manage', { 'id': entity.id }) }}">{{ entity.name }}</a></td>
+                <td>{% if entity.updated %}{{ entity.updated|date('d/m/Y') }}{% endif %}</td>
+                <td><a href="{{ path('grocerieslist_edit', { 'id': entity.id }) }}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-pencil"></span> Renommer</a> 
+                    <a href="{{ path('grocerieslist_manage', { 'id': entity.id }) }}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-ok"></span> Remplir</a> 
+                    <a href="{{  path('grocerieslist_printable', { 'id': entity.id }) }}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-print"></span> Version imprimable</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+<a href="{{ path('grocerieslist_new') }}" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus-sign"></span> Nouvelle liste</a>
+    {% endblock %}

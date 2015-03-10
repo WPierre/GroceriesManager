@@ -1,0 +1,10 @@
+{% set active_tab = 'items' %}
+{% extends 'WPierreGroceriesManagerBundle:Default:base.html.twig' %}
+
+{% block body -%}
+    <h1>Item creation</h1>
+
+    {{ form(form) }}
+
+<a href="{{ path('item') }}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-arrow-left"></span> Retour aux items</a>
+{% endblock %}

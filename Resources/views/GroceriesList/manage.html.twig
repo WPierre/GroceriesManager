@@ -1,0 +1,113 @@
+{% set active_tab = 'lists' %}
+{% extends 'WPierreGroceriesManagerBundle:Default:base.html.twig' %}
+
+{% block body -%}
+    <h1>Remplir la liste {{ entity.getName }}</h1>
+    
+<div class="">
+	<a href="{{  path('grocerieslist_empty', { 'id': entity.id }) }}" onClick="return confirm('Etes vous sur de vouloir vider cette liste ?')" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span> Vider la liste</a> 
+    <a href="{{  path('grocerieslist_printable', { 'id': entity.id }) }}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-print"></span> Version imprimable</a><br />
+    </div><br />
+  <label for="commentaire">Commentaire</label> 
+  <textarea id="commentaire" name="commentaire" class="form-control" rows="5" onChange="javascript:modifyCommentaire();return false;">{{ entity.getCommentaire }}</textarea><br />
+  {% for category in categories %}
+	<div class="panel panel-info">
+	  <div class="panel-heading">
+	    <h3 class="panel-title">{{ category.getName }}</h3>
+	  </div>
+	  <div id="category_{{ category.getId }}" class="panel-body">
+	    Chargement...
+	  </div>
+	</div>  
+  {% endfor %}
+  
+<script type="text/javascript">
+var id_liste = {{ entity.getId }};
+  function loadItems(id_category){
+	  $.ajax({
+	        url: "/item/getByListAndCategory/{{ entity.getId }}/"+id_category+"/",
+	        type: "GET",
+	        timeout: 3600000,
+	        dataType: "json",
+	        qty_input: $(this),
+	        id_category: id_category,
+	        success: function(json_data, textStatus, jqXHR) {
+	            /* here is the input, which triggered this AJAX request */
+	            //console.log(this.qty_input);
+	            /* here is any other parameter you set when initializing the ajax method */
+	            //console.log(this.anything_else_i_want_to_pass_in);
+	            //ailleurs, lorsque l'appel ajax est terminé, on met le retour dans la div dialog et on affiche dialog    
+	            //alert(this.index_type + " => "+html_data);
+	            //$( "#dialog" ).html(html_data);
+	            $("#category_"+id_category).html("");
+	            $.each(json_data,function(i, item){
+		            if (item.is_present){
+						var checked = 'checked="checked"';
+			        } else {
+						var checked = "";
+				    }
+	            	//alert('On remplit la catégorie '+item.category);
+	            	$("#category_"+id_category).append('<div id="form_conditionType"><div class="checkbox"><label><input onChange="javascript:switchItem('+item.id+');return false;" id="form_item_'+item.id+'" name="form[conditionType]" '+checked+' type="checkbox">'+item.name+'</label></div>');
+	            });
+	        },
+	        error: function(jqXHR, textStatus, errorThrown) {
+	            var msg = 'Groceries Manager a rencontré une erreur sur la récupération des items de la catégorie';
+	        },
+	    });
+  }
+  
+  function switchItem(id_item){
+	  	var checked = $('#form_item_'+id_item).prop('checked');
+		//alert('Je switche l\'item '+id_item+" pour la liste #"+id_liste+". L'item est activé ? : "+checked);
+
+		if (checked){
+			var action = "add";
+		} else {
+			var action = "remove";
+		}
+		url = "/item/ListManagerHelper/"+action+"/{{ entity.getId }}/"+id_item+"/";
+		$.ajax({
+	        url: url,
+	        type: "GET",
+	        timeout: 3600000,
+	        dataType: "json",
+	        qty_input: $(this),
+	        success: function(json_data, textStatus, jqXHR) {
+				//alert('ajout ok');
+	        },
+	        error: function(jqXHR, textStatus, errorThrown) {
+	            //alert('ajout not ok');
+	        },
+	    });
+	  }
+  
+  function modifyCommentaire(){
+	  	var commentaire = $('#commentaire').val();
+		//alert('Je switche l\'item '+id_item+" pour la liste #"+id_liste+". L'item est activé ? : "+checked);
+		//alert('je modifie le commentaire');
+		url = "/grocerieslist/modifyCommentaire/{{ entity.getId }}/";
+		$.ajax({
+	        url: url,
+	        type: "POST",
+	        data: {
+		        'commentaire' : commentaire
+		        },
+	        timeout: 3600000,
+	        dataType: "json",
+	        qty_input: $(this),
+	        success: function(json_data, textStatus, jqXHR) {
+				//alert('ajout ok');
+	        },
+	        error: function(jqXHR, textStatus, errorThrown) {
+	            //alert('ajout not ok');
+	        },
+	    });
+	  }
+  $( document ).ready(function() {
+	  
+	  {% for category in categories %}
+		loadItems({{ category.getId }});
+	  {% endfor %}
+	});
+</script>
+{% endblock %}

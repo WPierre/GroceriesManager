@@ -1,0 +1,35 @@
+{% set active_tab = 'lists' %}
+{% extends 'WPierreGroceriesManagerBundle:Default:base.html.twig' %}
+
+{% block body -%}
+    <h1>Liste {{ entity.getName }} - Version imprimable</h1>
+    <div><a href="{{ path('grocerieslist_manage', { 'id': entity.id }) }}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-ok"></span> Remplir la liste</a>
+	<a href="{{ path('grocerieslist') }}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-arrow-left"></span> Retour aux listes</a></div> <br />
+	
+	{% if entity.getCommentaire is defined %}
+	<div class="panel panel-info">
+	  <div class="panel-heading">
+	    <h3 class="panel-title">Commentaire</h3>
+	  </div>
+	  <div class="panel-body">
+	  {{ entity.getCommentaire }}
+	  </div>
+	</div>  
+	{% endif %}
+	
+   {% for name, category in tableau %}
+	<div class="panel panel-info">
+	  <div class="panel-heading">
+	    <h3 class="panel-title">{{ name }}</h3>
+	  </div>
+	  <div class="panel-body">
+	    {% for item in category %}
+	    	- {{ item.getName }}<br />
+	    {% endfor %}
+	  </div>
+	</div>  
+  {% endfor %}
+
+
+
+{% endblock %}

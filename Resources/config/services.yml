@@ -1,0 +1,7 @@
+parameters:
+#    w_pierre_groceries_manager.example.class: WPierre\GroceriesManagerBundle\Example
+
+services:
+#    w_pierre_groceries_manager.example:
+#        class: %w_pierre_groceries_manager.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

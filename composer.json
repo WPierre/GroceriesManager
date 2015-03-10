@@ -1,0 +1,30 @@
+{
+	"name" : "wpierre/groceries_manager",
+	"description" : "A bundle made for managing groceries shopping lists",
+	"homepage" : "https://github.com/WPierre/GroceriesManager",
+	"authors" : [{
+			"name" : "WPierre",
+			"homepage" : "https://github.com/WPierre",
+			"role" : "author"
+		}
+	],
+	"support" : {
+		"issues" : "https://github.com/WPierre/GroceriesManager/issues",
+		"source" : "https://github.com/WPierre/GroceriesManager"
+	},
+	"autoload" : {
+		"psr-4" : {
+			"Wpierre\\GroceriesManagerBundle\\" : ""
+		}
+	},
+	"keywords" : [
+		"groceries",
+		"symfony",
+		"list"
+	],
+	"require" : {
+		"whiteoctober/tcpdf-bundle" : "dev-master",
+		"smalot/pdfparser" : "*"
+	},
+	"license" : "GPL-3.0"
+}

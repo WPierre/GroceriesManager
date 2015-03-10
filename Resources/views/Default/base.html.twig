@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+    	<title>{% if page_title is defined %}Groceries Manager - {{ page_title }}{% else %}Groceries Manager{% endif %}</title>
+        <!--<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css" />-->
+        <link rel="stylesheet" href="/bundles/wpierregroceriesmanager/css/style.css" />
+        <script type="text/javascript" src="/bundles/wpierregroceriesmanager/js/jquery-1.11.1.min.js"></script>
+        <script type="text/javascript" src="/bundles/wpierregroceriesmanager/jquery-ui/jquery-ui.js"></script>
+        <link rel="stylesheet" href="/bundles/wpierregroceriesmanager/jquery-ui/jquery-ui.css"/>
+        <!-- Bootstrap core CSS -->
+    	<link href="/bundles/wpierregroceriesmanager/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    	<!-- Bootstrap theme -->
+    	<link href="/bundles/wpierregroceriesmanager/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+    	<!-- Theme du site -->
+    	<link href="/bundles/wpierregroceriesmanager/css/theme.css" rel="stylesheet">
+    	<!-- Bootstrap js -->
+    	<script type="text/javascript" src="/bundles/wpierregroceriesmanager/bootstrap/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+    	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      		<div class="container">
+	      		<div class="navbar-header">
+		          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+		            <span class="sr-only">Toggle navigation</span>
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+		          </button>
+		          <a class="navbar-brand" href="{{ path('w_pierre_groceries_manager_homepage') }}">Groceries Manager</a>
+		        </div>
+		        <div class="collapse navbar-collapse">
+		          <ul class="nav navbar-nav">
+		            <li{% if active_tab is defined and active_tab == "lists" %} class="active"{% endif %}><a href="{{ path('grocerieslist') }}">Listes</a></li>
+		            <li{% if active_tab is defined and active_tab == "categories" %} class="active"{% endif %}><a href="{{ path('category') }}">Categories</a></li>
+		            <li{% if active_tab is defined and active_tab == "items" %} class="active"{% endif %}><a href="{{ path('item') }}">Items</a></li>
+		          </ul>
+		        </div><!--/.nav-collapse -->
+		      </div>
+      		</div>
+      	</div>
+      	<div class="container" role="main">
+      	<div class="container theme-showcase" role="main">
+    {% for type, messages in app.session.flashBag.all %}
+		{% for message in messages %}
+	
+			{%if type == 'error'%} {% set type = 'danger' %} {%endif%}
+			<div class="alert alert-{{ type }}" role="alert">
+				{{ message|raw }}
+			</div>
+		{% endfor %}
+	{% endfor %} 
+        	{% block body %}{% endblock %}
+        	{% block javascripts %}{% endblock %}
+        </div>
+    </body>
+</html>
