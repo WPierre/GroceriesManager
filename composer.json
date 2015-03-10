@@ -23,7 +23,7 @@
 		"list"
 	],
 	"require" : {
-		"whiteoctober/tcpdf-bundle" : "dev-master",
+		"whiteoctober/tcpdf-bundle" : "1.0.1",
 		"smalot/pdfparser" : "*"
 	},
 	"license" : "GPL-3.0",
