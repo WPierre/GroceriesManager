@@ -14,7 +14,7 @@
 	},
 	"autoload" : {
 		"psr-4" : {
-			"Wpierre\\GroceriesManagerBundle\\" : ""
+			"Wpierre\\GroceriesManagerBundle\\" : "src/"
 		}
 	},
 	"keywords" : [
@@ -23,7 +23,7 @@
 		"list"
 	],
 	"require" : {
-		"whiteoctober/tcpdf-bundle" : "1.0.1",
+		"whiteoctober/tcpdf-bundle" : "dev-master",
 		"smalot/pdfparser" : "*"
 	},
 	"license" : "GPL-3.0",
