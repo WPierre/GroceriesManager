@@ -1,10 +1,7 @@
-w_pierre_groceries_manager_homepage_old:
-    path:     /hello/{name}
-    defaults: { _controller: WPierreGroceriesManagerBundle:Default:index }
 
-w_pierre_groceries_manager_homepage:
-    path:     /
-    defaults: { _controller: WPierreGroceriesManagerBundle:GroceriesList:index }
+#w_pierre_groceries_manager_homepage:
+#    path:     /
+#    defaults: { _controller: WPierreGroceriesManagerBundle:GroceriesList:index }
 
 groceriesmanager_controllers:
   resource: "@WPierreGroceriesManagerBundle/Controller/"
